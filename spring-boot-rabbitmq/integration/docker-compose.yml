@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - rabbitmq_data
+  consumer_resources:
+    build: ""
+    environment:
+    - 'SPRING_PROFILES_ACTIVE=consumer'
+    - 'CONSUMER_ROUTING_KEY=resource.*'
+    depends_on:
+      - producer
+  consumer_otherevents:
+    build: ""
+    environment:
+    - 'SPRING_PROFILES_ACTIVE=consumer'
+    - 'CONSUMER_ROUTING_KEY=otherevent'
+    depends_on:
+      - producer
+  producer:
+    build: ""
+    environment:
+    - 'SPRING_PROFILES_ACTIVE=producer'
+    depends_on:
+      - rabbitmq

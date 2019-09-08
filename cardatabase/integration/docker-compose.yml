@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  springbootapp:
+    container_name: springbootapp
+    build: ./../
+    ports:
+    - 8001:8001
+  db:
+    container_name: cardatabase
+    image: postgres:alpine
+    restart: on-failure
+    ports:
+    - 5432:5432
+    environment:
+    - POSTGRES_USER=cardb
+    - POSTGRES_PASSWORD=cardbpassword
+    - POSTGRES_DB=cardb
+    volumes:
+    - ./pgdata:/var/lib/postgresql/data
