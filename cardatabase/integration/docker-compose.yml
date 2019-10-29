@@ -6,6 +6,8 @@ services:
     build: ./../
     ports:
     - 8001:8001
+    links:
+      - db
   db:
     container_name: cardatabase
     image: postgres:alpine
@@ -16,5 +18,5 @@ services:
     - POSTGRES_USER=cardb
     - POSTGRES_PASSWORD=cardbpassword
     - POSTGRES_DB=cardb
-    volumes:
-    - ./pgdata:/var/lib/postgresql/data
+    #volumes:
+    #- ./pgdata:/var/lib/postgresql/data

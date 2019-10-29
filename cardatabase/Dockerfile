@@ -4,7 +4,7 @@ COPY src /tmp/src/
 
 WORKDIR /tmp/
 
-RUN mvn package
+RUN mvn package -DskipTests=true
 
 FROM openjdk:8u212-jdk-alpine
 COPY --from=MAVEN_TOOL_CHAIN /tmp/target/cardatabase*.jar app.jar
